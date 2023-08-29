@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .movie-list-container {
+    @apply grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-10 ;
+    background-color: #000000;
+  }
+}
+
+
+  mat-paginator {
+    display: flex ;
+    justify-content: center ;
+    background-color: #000000;
+    color: #fff;
+    ::ng-deep .mat-paginator-page-size { 
+        ::ng-deep .mat-select-value {   // this is to change color of page size text in mat paginator
+          color: #fff !important;
+        }
+      
+        ::ng-deep .mat-select-trigger {   // this is to change color of page size text in mat paginator
+          color: #fff !important;
+        }
+      
+        ::ng-deep .mat-select-arrow {    // this is to change color of arrow beside pagesize in mat paginator
+          color: #fff !important;
+        }   
+      }
+  }
+
+  

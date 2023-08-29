@@ -1,0 +1,30 @@
+.card-image{
+    height: 400px;
+    width: 100%;
+    
+}
+*{
+    color: #ffffff;
+}
+.movie-card{
+    border-radius: 10px;
+    padding-top: 0px;
+    //background-color: #1a1a1a;
+    background-color: #353535;
+}
+.card-title{
+    color: #f5c518;
+    margin-top: 0px;
+}
+
+.watchlist-button{
+    color: #5799ef !important;
+}
+
+.info-button{
+    color: #ffffff !important;
+}
+.card-header{
+    display: flex;
+    align-items: center;
+}
