@@ -11,6 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
 import { MovieListComponent } from './components/movie-list/movie-list.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TitlePipe } from './pipes/title.pipe';
 
 
 @NgModule({
@@ -21,14 +23,17 @@ import { MovieDetailsComponent } from './components/movie-details/movie-details.
     FooterComponent,
     MovieCardComponent,
     MovieListComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    TitlePipe,
+
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

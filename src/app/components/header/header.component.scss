@@ -9,17 +9,14 @@
         
     }
 }
+
 .search-box{
-    margin-bottom: -1.25rem;
-   
+    margin-bottom: -1.25rem;  
 }
 .menu-button{
-    display: none !important;
-    @media screen and (max-width: 768px) {
-        display: block !important;
-      }
-    
+     //display: none !important;  
 }
+
 .header-title{
 
 }
@@ -27,8 +24,18 @@
     color: #000;
     cursor: pointer;
     display: block !important;
-    @media screen and (max-width: 768px) {
-        display: none !important;
-      } 
 }
 
+@media screen and (max-width: 768px) {
+    .menu-button{
+        display: block !important;  
+   }
+   
+  }
+
+  @media screen and (max-width: 640px) {
+    .search-box{
+        display: none !important;  
+    }
+   
+  }

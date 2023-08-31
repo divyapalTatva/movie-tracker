@@ -4,3 +4,24 @@
 @tailwind utilities;
 html, body { height: 100%; }
 body { margin: 0;font-family: Roboto, sans-serif; }
+
+.mat-mdc-paginator-page-size-select {
+    color: #fafafa;
+  }
+
+//   .mat-mdc-icon-button[disabled] .mat-mdc-paginator-icon {
+//     fill: #fafafa;
+// }
+.mat-mdc-icon-button .mat-mdc-paginator-icon {
+    fill: #fafafa;
+}
+.mat-mdc-paginator .mat-mdc-select-value {
+    color: #fff;
+}
+
+.mat-mdc-text-field-wrapper{
+    border: #fafafa;
+}
+.mat-mdc-select-arrow svg {
+    fill: #fff !important;
+}

@@ -1,4 +1,4 @@
-<mat-card class="movie-card">
+<mat-card class="movie-card ">
     <mat-card-header class="card-header">
       
       <mat-card-title class="card-title">{{movie.title}}</mat-card-title>
@@ -7,7 +7,7 @@
     <img mat-card-image class="card-image" [src]="'../../../assets/images/'+movie.posterUrl" alt="Movie Poster">
     <mat-card-content class="mt-1">
       <p>
-        {{movie.description}}
+        {{movie.description| title}}
       </p>
     </mat-card-content>
     <mat-card-actions>
