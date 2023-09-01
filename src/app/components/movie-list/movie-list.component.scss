@@ -7,12 +7,41 @@
     @apply grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 p-10 ;
     background-color: #000000;
     min-height: calc(100vh - 170px);
+    padding-top: 0px !important;
   }
 }
 
+.no-movie{
+ 
+  display: flex;
+  color: #f5c518;
+  font-weight: 400;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
 
+.extra-div{
+  height: 56px;
+  background-color: #000000;
+}
 
+.add-movie{
+  display: flex;
+  justify-content: end;
+  background-color: #000000;
+  padding-right: 40px;
+  padding: 10px 40px;
+}
 
+.add-movie-button{
+  background-color: #f5c518; 
+}
+
+.add-icon{
+  color: #000;
+  font-weight: 500;
+}
 mat-paginator {
   display: flex ;
   justify-content: center ;

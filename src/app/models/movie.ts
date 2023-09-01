@@ -4,4 +4,7 @@ export interface Movie {
     posterUrl:string,
     genre:string,
     description:string,
+    director:string,
+    writer:string,
+    leadActor:string
 }

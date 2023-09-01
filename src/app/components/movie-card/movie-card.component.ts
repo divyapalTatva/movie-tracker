@@ -8,4 +8,11 @@ import { Movie } from 'src/app/models/movie';
 })
 export class MovieCardComponent {
 @Input() movie!:Movie
+
+watchlistIcon:string='add';
+
+toggleWatchList(){
+
+  this.watchlistIcon=='add' ? this.watchlistIcon='done' :this.watchlistIcon='add'
+}
 }

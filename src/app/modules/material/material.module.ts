@@ -9,6 +9,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatSidenavModule} from '@angular/material/sidenav';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
 @NgModule({
   declarations: [],
   imports: [
@@ -25,7 +27,9 @@ import {MatTableModule} from '@angular/material/table';
     MatCardModule,
     MatSidenavModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatDividerModule,
+    MatListModule
   ]
 })
 export class MaterialModule { }

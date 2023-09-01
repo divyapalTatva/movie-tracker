@@ -1,1 +1,88 @@
-<p>movie-details works!</p>
+<details-header></details-header>
+<div class="movie-list-container">
+  <div class="left-div">
+    <img
+      mat-card-image
+      [src]="'../../../assets/images/' + movie.posterUrl"
+      alt="Movie Poster"
+      class="movie-image"
+    />
+  </div>
+  <div class="right-div">
+    <div class="grid grid-cols-6">
+      <div class="title col-span-6">
+        <mat-card-title class="card-title">{{ movie.title }}</mat-card-title>
+      </div>
+      <div class="info col-span-6 grid grid-cols-6 gap-10">
+        <div class="sm:col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3">
+          <div class="info-div">
+            <span>Director :</span>
+            <span class="info-name"> {{ movie.director }}</span>
+          </div>
+
+          <mat-divider> </mat-divider>
+          <div class="info-div">
+            <span>Writer :</span>
+            <span class="info-name"> {{ movie.writer }}</span>
+          </div>
+
+          <mat-divider> </mat-divider>
+
+          <div class="info-div">
+            <span>Lead Actor :</span>
+            <span class="info-name"> {{ movie.leadActor }}</span>
+          </div>
+
+          <mat-divider> </mat-divider>
+          <div class="info-div">
+            <span>Genre :</span>
+            <span class="info-name"> {{ movie.genre }}</span>
+          </div>
+
+          <mat-divider> </mat-divider>
+        </div>
+
+        <div class="sm:col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3 flex flex-col justify-evenly">
+          <div>
+            <span class="ratings">Ratings</span>
+            <div class="rate-content">
+              <div class="w-fit">
+                <mat-icon class="star">star</mat-icon>
+              </div>
+              <div class="w-fit">
+                <span> 8.7/10</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <button
+              mat-button
+              class="watchlist-button"
+              (click)="toggleWatchList()"
+            >
+              <mat-icon class="watchlist-button">{{ watchlistIcon }}</mat-icon
+              >Watchlist
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="storyline-div col-span-6">
+        <span class="storyline">Storyline</span>
+        <p class="movie-description">
+          {{ movie.description }}
+        </p>
+      </div>
+
+      <span class="storyline col-span-6 mt-7">Box Office</span>
+      <div class="storyline-div col-span-6 grid grid-cols-6 gap-5">
+        <div class="sm:col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3 color-white">Budget :</div>
+        <div class="sm:col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3 color-white">Gross Worldwide :</div>
+        <div class="sm:col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3 color-white">Gross India :</div>
+        <div class="sm:col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3 color-white">Total:</div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

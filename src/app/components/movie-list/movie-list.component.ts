@@ -24,7 +24,8 @@ dataSource!: MatTableDataSource<any>;
       this.moviesService.movies=data;
       
       this.displayedMovies=data.slice(0,5);
-      this.moviesService.setLocalStorage("movies",data);
+      
+      this.moviesService.setMoviesToLocal(data);
     });
   }
 

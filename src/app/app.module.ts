@@ -13,7 +13,9 @@ import { MovieListComponent } from './components/movie-list/movie-list.component
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TitlePipe } from './pipes/title.pipe';
-
+import { DetailsHeaderComponent } from './components/details-header/details-header.component';
+import { AddEditMovieComponent } from './components/add-edit-movie/add-edit-movie.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { TitlePipe } from './pipes/title.pipe';
     MovieListComponent,
     MovieDetailsComponent,
     TitlePipe,
+    DetailsHeaderComponent,
+    AddEditMovieComponent,
 
     
   ],
@@ -33,7 +37,8 @@ import { TitlePipe } from './pipes/title.pipe';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    CKEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

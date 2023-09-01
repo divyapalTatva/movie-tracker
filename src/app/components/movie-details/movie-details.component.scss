@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .movie-list-container {
+    @apply grid sm:grid-cols-12 md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-5 p-20 ;
+    background-color: #000000;
+    min-height: calc(100vh - 114px);
+  }
+
+  .right-div{
+@apply sm:col-span-12 sm:ms-0 md:col-span-6  lg:col-span-8 lg:ms-5 xl:col-span-9 xl:ms-10;
+    padding: 20px;
+    
+}
+
+.left-div{
+
+    @apply sm:col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3;
+        padding: 20px;
+        background-color: #353535;
+        border-radius: 5px;
+        padding: 20px;
+        max-height: 550px;
+    }
+
+}
+
+.movie-image{
+width: 100%;
+}
+.movie-image{
+    height: 500px;
+}
+
+.card-title{
+    color: #f5c518;
+    margin-top: 0px;
+    font-size: 30px !important;
+}
+
+.info{
+    color: #fff !important; 
+    margin-top: 30px;
+    font-weight: 500;
+}
+.info-div{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 3px;
+    font-size: 22px;
+}
+
+.info-name{
+    color: #5799ef !important;
+}
+.movie-description{
+    font-size: 18px;
+    font-weight: 400;
+    color:#fff !important;
+    margin-top: 30px;
+}
+.storyline{
+    font-size: 32px;
+    color: #fff !important;
+    font-weight: 500px;
+}
+.storyline-div{
+    margin-top: 30px;
+}
+.watchlist-button{
+    color: #5799ef !important;
+    font-size: 25px;
+}
+.ratings{
+    font-size: 25px;
+    color: #fff !important;
+    font-weight: 500px;
+}
+.star{
+    color: #f5c518;
+    
+}
+
+.color-white{
+    color: white !important;
+    font-size: 20px;
+}
+
+.rating-watchlist{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 3px;
+    align-items: end !important; 
+}
+.rate-content{
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+
+}

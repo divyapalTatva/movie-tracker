@@ -12,7 +12,7 @@ export class MoviesService {
   }
   movies:Movie[]=[];
   search=new Subject<string>();
-  
+
   loadMovies() {
     return this.http.get<Movie[]>('http://localhost:3000/movies');
   }
@@ -29,4 +29,24 @@ export class MoviesService {
     }
     return null;
   }
+
+  getMovieDetails(id:number):Movie{
+    this.getMoviesFromLocal();
+     let movies:Movie[]=this.movies.filter((movie)=>{
+      return movie.id==id?true:false
+    })
+      return movies[0];
+    
+
+    
+  }
+
+  getMoviesFromLocal(){
+    this.movies=this.getLocalStorage('movies');
+  }
+
+  setMoviesToLocal(data:any){
+    this.setLocalStorage('movies',data);
+  }
+
 }
