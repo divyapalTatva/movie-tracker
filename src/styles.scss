@@ -25,3 +25,6 @@ body { margin: 0;font-family: Roboto, sans-serif; }
 .mat-mdc-select-arrow svg {
     fill: #fff !important;
 }
+.ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items{
+    flex-wrap: wrap !important;
+}

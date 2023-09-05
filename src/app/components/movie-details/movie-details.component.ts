@@ -20,12 +20,12 @@ constructor(private route:ActivatedRoute,private movieService:MoviesService){
   ngOnInit(): void {
     this.route.params.subscribe((params)=>{
       this.id=params['id'];
-      this.movie=this.movieService.getMovieDetails(this.id)
+      this.movie=this.movieService.getMovieDetails(this.id);
+      
     })
-
-    this.movie=this.movieService.getMovieDetails(this.id)
     window.scrollTo(0, 0)
   }
+  
   toggleWatchList(){
 
     this.watchlistIcon=='add' ? this.watchlistIcon='done' :this.watchlistIcon='add'

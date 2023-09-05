@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Movie } from '../models/movie';
+import { Genre, Movie } from '../models/movie';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
@@ -10,11 +10,20 @@ export class MoviesService {
   constructor(private http: HttpClient) {
 
   }
+
   movies:Movie[]=[];
   search=new Subject<string>();
 
-  loadMovies() {
+  getMovies() {
     return this.http.get<Movie[]>('http://localhost:3000/movies');
+  }
+
+  postMovie(data:Movie){
+    return this.http.post('http://localhost:3000/movies',data);
+  }
+
+  getGenre(){
+    return this.http.get<Genre[]>('http://localhost:3000/genre');
   }
 
   setLocalStorage(key: string, value: any) {
@@ -31,18 +40,14 @@ export class MoviesService {
   }
 
   getMovieDetails(id:number):Movie{
-    this.getMoviesFromLocal();
-     let movies:Movie[]=this.movies.filter((movie)=>{
-      return movie.id==id?true:false
-    })
-      return movies[0];
-    
-
-    
+    this.movies=this.getMoviesFromLocal();
+     return this.movies.find(movie=>
+       movie.id==id?true:false
+    )!
   }
 
   getMoviesFromLocal(){
-    this.movies=this.getLocalStorage('movies');
+    return this.getLocalStorage('movies');
   }
 
   setMoviesToLocal(data:any){

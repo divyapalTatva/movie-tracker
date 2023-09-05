@@ -1,4 +1,10 @@
 
+<mat-toolbar  class=" search-header" color="primary">
+  <mat-form-field class="search-box">
+    <input type="text" matInput appearance="fill" placeholder="search movie" (keyup)="searchMovie($event)">
+    <mat-icon matSuffix class="search-icon">search</mat-icon>
+  </mat-form-field>
+ </mat-toolbar>
 
 <div></div>
 <div class="add-movie">

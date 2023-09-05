@@ -11,6 +11,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
+import {MatSelectModule} from '@angular/material/select';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -29,7 +31,8 @@ import {MatListModule} from '@angular/material/list';
     MatPaginatorModule,
     MatTableModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    MatSelectModule 
   ]
 })
 export class MaterialModule { }

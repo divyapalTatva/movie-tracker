@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { Movie } from 'src/app/models/movie';
 import { MoviesService } from 'src/app/services/movies.service';
 
@@ -20,19 +20,16 @@ searchedMovies!:Observable<Movie[]>;
 dataSource!: MatTableDataSource<any>;
 
   constructor(private moviesService: MoviesService,private changeDetector:ChangeDetectorRef) {
-    this.moviesService.loadMovies().subscribe((data) => {
+  }
+
+  ngOnInit(): void {
+    
+    this.moviesService.getMovies().subscribe((data)=>{  
       this.moviesService.movies=data;
       
       this.displayedMovies=data.slice(0,5);
       
       this.moviesService.setMoviesToLocal(data);
-    });
-  }
-
-  ngOnInit(): void {
-    
-    this.moviesService.loadMovies().subscribe((data)=>{  
-      this.moviesService.movies=data;
       this.dataSource=new MatTableDataSource<any>(
         this.moviesService.movies
         );
@@ -42,9 +39,14 @@ dataSource!: MatTableDataSource<any>;
         this.dataSource.paginator = this.paginator;
     });
     
-    this.moviesService.search.subscribe((data)=>{  
+    this.moviesService.search.subscribe({next:(data)=>{  
+      console.log("NEXT");
+      
        this.dataSource.filter=data;
-     })
+     },
+    error:(err)=>{console.log("err");
+    alert("err")
+    }})
 
       
 //     this.moviesService.search.subscribe((data)=>{  
@@ -66,6 +68,8 @@ dataSource!: MatTableDataSource<any>;
     this.changeDetector.detectChanges();
   }
 
- 
+  searchMovie(event:any){
+    this.moviesService.search.next(event.target.value.trim());
+  }
 
 }

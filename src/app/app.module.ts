@@ -16,6 +16,8 @@ import { TitlePipe } from './pipes/title.pipe';
 import { DetailsHeaderComponent } from './components/details-header/details-header.component';
 import { AddEditMovieComponent } from './components/add-edit-movie/add-edit-movie.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    CKEditorModule
+    CKEditorModule,
+    ReactiveFormsModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

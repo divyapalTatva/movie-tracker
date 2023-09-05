@@ -1,7 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+  .form-field {
+    @apply sm:col-span-1 md:col-span-12 lg:col-span-6 xl:col-span-6
+ 
+}}
+
+
+
 :host ::ng-deep .ck-editor__editable_inline {
-    height: 300px !important;
-    width: 80vw;
+    height: 300px !important; 
 }
-.ck-editor{
-    border: 1px solid black;
+
+// :host ::ng-deep ck-sticky-panel__content{
+//   width: 80vw !important;
+// }
+
+
+.form-container{
+    
+    background-color: #353535 !important;
+    padding: 50px;
 }
+
+.width-100{
+    width: 100% !important;
+
+}
+
+.main-div{
+background-color: black;
+border-radius: 25px;
+padding: 50px;
+}
+
+.white-font{
+    color:white !important;
+}
+.submit-div{
+  display: flex;
+  justify-content: end;
+}
+
+.white-border{
+  border: white;
+}
+
+@media screen and (max-width:410px){
+
+.main-div{
+  padding: 10px;
+  }
+
+  .form-container{
+    padding: 10px;
+}
+}
+
+
+  @media screen and (max-width:767px){
+    .main-div{
+      padding: 25px;
+      }
+
+      .form-container{
+        padding: 25px;
+    }
+  }

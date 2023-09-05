@@ -16,6 +16,5 @@ export class HeaderComponent {
 
   searchMovie(event:any){
     this.movieService.search.next(event.target.value.trim());
-
   }
 }

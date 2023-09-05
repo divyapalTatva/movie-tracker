@@ -9,6 +9,32 @@
     min-height: calc(100vh - 170px);
     padding-top: 0px !important;
   }
+
+  .search-header{
+    @apply flex justify-between items-center;
+    display: none;
+    
+}
+
+}
+
+@media screen and (max-width: 640px) {
+  .search-header{
+      display: flex !important;  
+      justify-content: center !important;
+      align-items: center !important;
+  }
+ 
+}
+
+.search-icon{
+  color: #000;
+  cursor: pointer;
+  display: block !important;
+}
+
+.search-box{
+  margin-bottom: -1.25rem;  
 }
 
 .no-movie{

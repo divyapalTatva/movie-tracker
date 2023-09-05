@@ -6,5 +6,18 @@ export interface Movie {
     description:string,
     director:string,
     writer:string,
-    leadActor:string
+    leadActor:string,
+    boxOffice:BoxOffice
+}
+
+export interface BoxOffice{
+    budget:string,
+    grossIndia:string,
+    grossWorld:string,
+    total:string
+}
+
+export interface Genre{
+id:number,
+name:string
 }
