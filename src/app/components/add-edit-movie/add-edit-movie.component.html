@@ -43,7 +43,7 @@
                 <mat-form-field class="width-100 form-input">
                   <mat-label>Genre</mat-label>
                   <mat-select formControlName="genre">
-                    <mat-option *ngFor="let genre of genres" [value]="genre.id">
+                    <mat-option *ngFor="let genre of genres" [value]="genre.name">
                       {{genre.name}}
                     </mat-option>
                   </mat-select>
@@ -83,18 +83,27 @@
     <div class="form-field">
       <h4  class="white-font">Total Collection</h4>
       <mat-form-field class="width-100">
-          <input matInput formControlName="totalCollection">
-          <mat-error *ngIf="movieForm.get('totalCollection')?.invalid && movieForm.get('totalCollection')?.touched">{{getBoxOfficeError("totalCollection")}}</mat-error>
+          <input matInput formControlName="total">
+          <mat-error *ngIf="movieForm.get('total')?.invalid && movieForm.get('total')?.touched">{{getBoxOfficeError("total")}}</mat-error>
         </mat-form-field>
         
   </div> 
+
+              
+  <div class="sm:col-span-1 md:col-span-12 lg:col-span-12  xl:col-span-12">
+    <input  type="file" #filePicker  (input)="onImagePicked($event)" formControlName="posterUrl">
+    <mat-error *ngIf="movieForm.get('posterUrl')?.hasError('required') && invalidImg">Please Upload Valid Image</mat-error>
+            </div>
+            <div class="sm:col-span-1 md:col-span-12 lg:col-span-12  xl:col-span-12" [ngClass]="{'none':!movieForm.get('posterUrl')?.valid,'block':movieForm.get('posterUrl')?.valid}">
+              <mat-icon class="white-font" (click)="removeImage()"> close</mat-icon>
+             <img [src]="imagePath" class="previewImg" alt="">
+                      </div>
   <div class="sm:col-span-1 md:col-span-12 lg:col-span-12  xl:col-span-12 submit-div">
-    <button mat-button class="white-font white-border">Cancel</button>
+    <button mat-button (click)="cancel()" class="white-font white-border">Cancel</button>
     <button mat-button  class="white-font" (click)="submit()"> Submit</button>
             </div>
-        </div>
 
-        
+        </div>
 
         
     </form>

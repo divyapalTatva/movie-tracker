@@ -49,6 +49,36 @@ padding: 50px;
   border: white;
 }
 
+input[type=file]::file-selector-button {
+  border: 2px solid #6c5ce7;
+  padding: .2em .4em;
+  border-radius: .2em;
+  background-color: #a29bfe;
+  transition: 1s;
+}
+
+input[type=file]::file-selector-button:hover {
+  background-color: #81ecec;
+  border: 2px solid #00cec9;
+}
+
+input[type=file]{
+  color:white
+}
+
+.none{
+display: none !important;
+}
+
+.block{
+  display: block !important;
+  }
+
+  .previewImg{
+    height: 100px;
+    width: 70px ;
+  }
+  
 @media screen and (max-width:410px){
 
 .main-div{

@@ -8,7 +8,7 @@
 
 <div></div>
 <div class="add-movie">
-    <button mat-fab class="add-movie-button" aria-label="Example icon button with a delete icon" routerLink="add-edit-movie">
+    <button mat-fab class="add-movie-button" aria-label="Example icon button with a delete icon"  routerLink="add-edit-movie/0">
         <mat-icon class="add-icon">add</mat-icon>
       </button>
 </div>
@@ -17,7 +17,7 @@
         <div *ngIf="dataSource?.filteredData?.length ==0" class="no-movie col-span-12">
             Sorry !! No such movie found 
             </div>
-        <app-movie-card *ngFor="let movie of searchedMovies|async;let i=index" [movie]="movie">
+        <app-movie-card *ngFor="let movie of searchedMovies|async;let i=index" [movie]="movie" (deleteEvent)="deleteMovie($event)">
     
         </app-movie-card>
     
@@ -25,7 +25,7 @@
     <div >
 
     </div >
-    <mat-paginator *ngIf="dataSource?.filteredData?.length !=0"
+    <mat-paginator
                   [pageSize]="5"
                   [pageSizeOptions]="[5, 10, 25, 100]"
     

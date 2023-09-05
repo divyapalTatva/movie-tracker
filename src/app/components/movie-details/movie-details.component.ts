@@ -12,8 +12,8 @@ export class MovieDetailsComponent implements OnInit{
   movie!:Movie;
   id:number=0;
   watchlistIcon:string='add';
+  
 constructor(private route:ActivatedRoute,private movieService:MoviesService){
-
 }
 
 

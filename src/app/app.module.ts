@@ -17,7 +17,7 @@ import { DetailsHeaderComponent } from './components/details-header/details-head
 import { AddEditMovieComponent } from './components/add-edit-movie/add-edit-movie.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     HttpClientModule,
     CKEditorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
     
   ],
   providers: [],

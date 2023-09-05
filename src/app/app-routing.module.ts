@@ -7,7 +7,7 @@ import { AddEditMovieComponent } from './components/add-edit-movie/add-edit-movi
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'moviesDetails/:id', component: MovieDetailsComponent },
-  { path: 'add-edit-movie', component: AddEditMovieComponent },
+  { path: 'add-edit-movie/:id', component: AddEditMovieComponent },
 ];
 
 @NgModule({

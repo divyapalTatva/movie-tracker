@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Movie } from 'src/app/models/movie';
+import { MoviesService } from 'src/app/services/movies.service';
 
 @Component({
   selector: 'app-movie-card',
@@ -7,12 +8,19 @@ import { Movie } from 'src/app/models/movie';
   styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent {
-@Input() movie!:Movie
+  constructor(){
 
+  }
+@Input() movie!:Movie;
+@Output() deleteEvent=new EventEmitter<number>()
 watchlistIcon:string='add';
 
 toggleWatchList(){
-
   this.watchlistIcon=='add' ? this.watchlistIcon='done' :this.watchlistIcon='add'
 }
+
+deleteMovie(id:number){
+  this.deleteEvent.emit(id);
+}
+
 }
