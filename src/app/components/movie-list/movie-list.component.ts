@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Observable, catchError } from 'rxjs';
+import { MOVIES } from 'src/app/data/data';
 import { Movie } from 'src/app/models/movie';
 import { MoviesService } from 'src/app/services/movies.service';
 
@@ -22,39 +23,39 @@ dataSource!: MatTableDataSource<any>;
   }
 
   ngOnInit(): void {    
-    this.moviesService.getMovies().subscribe((data)=>{  
-      this.moviesService.movies=data;
-      this.moviesService.setMoviesToLocal(data);
-      this.dataSource=new MatTableDataSource<any>(
-        this.moviesService.movies
-        );
-        this.searchedMovies = this.dataSource.connect();
-        this.dataSource.paginator = this.paginator;
-    });
-    
-    this.moviesService.search.subscribe({next:(data)=>{    
-       this.dataSource.filter=data;
-     },
-    error:(err)=>{
-    
-    }})
-
-//     this.moviesService.search.subscribe((data)=>{  
-//       this.dataSource= this.moviesService.movies.filter((movie)=>{
-//        if(movie.title.toLowerCase().includes(data.toLowerCase()) || movie.description.toLowerCase().includes(data.toLowerCase()) || movie.genre.toLowerCase().includes(data.toLowerCase())){
-//  return true
-//        }
-//        return false;
-//       })
-//       this.paginate({}) 
-//      })
-
+    let movies=this.moviesService.getMoviesFromLocal();
+    if(movies==null){
+      // this.moviesService.getMovies().subscribe((data)=>{  
+      //   this.moviesService.setMoviesToLocal(data);
+      //   this.moviesService.movies=data;
+      //   this.setDataSource();
+      // });
+       
+        this.moviesService.setMoviesToLocal(MOVIES);
+        this.moviesService.movies=MOVIES;
+        this.setDataSource();
+     
+    }
+    else{
+      this.moviesService.movies=movies;
+    }    
   }
 
   ngAfterViewInit(): void {
+    this.setDataSource();
     this.changeDetector.detectChanges();
   }
 
+  setDataSource(){
+    this.dataSource=new MatTableDataSource<any>(
+      this.moviesService.movies
+      );
+      this.searchedMovies = this.dataSource.connect();
+      this.dataSource.paginator = this.paginator;
+      this.moviesService.search.subscribe({next:(data)=>{    
+        this.dataSource.filter=data;
+      }})
+  }
   searchMovie(event:any){
     this.moviesService.search.next(event.target.value.trim());
   }
@@ -63,6 +64,7 @@ dataSource!: MatTableDataSource<any>;
     this.dataSource.data=this.dataSource.data.filter((data)=>{return data.id==id? false:true
     });
     this.dataSource._updateChangeSubscription();
-    this.moviesService.deleteMovie(id).subscribe((data)=>{});
+    // this.moviesService.deleteMovie(id).subscribe((data)=>{});
+    this.moviesService.deleteMovieLocally(id);
   }
 }

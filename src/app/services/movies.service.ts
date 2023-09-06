@@ -30,10 +30,11 @@ export class MoviesService {
 
   updateMovieLocally(id: number, data: Movie) {
     let movies: Movie[] = this.getMoviesFromLocal();
-    movies = movies.map((movie) => {
-      return data.id == id ? data : movie;
+    movies = movies.map((movie) => {  
+      return movie.id == id ? data : movie;
     });
     this.setMoviesToLocal(movies);
+    this.updateData()
   }
 
   addMovieLocally(data: Movie) {
@@ -42,6 +43,7 @@ export class MoviesService {
     data.id = id;
     movies.push(data);
     this.setMoviesToLocal(movies);
+    this.updateData()
   }
 
   deleteMovieLocally(id: number) {
@@ -80,5 +82,9 @@ export class MoviesService {
 
   setMoviesToLocal(data: any) {
     this.setLocalStorage('movies', data);
+  }
+
+  updateData(){
+    this.movies=this.getMoviesFromLocal();
   }
 }

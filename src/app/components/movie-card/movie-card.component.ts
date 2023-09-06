@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Movie } from 'src/app/models/movie';
 import { MoviesService } from 'src/app/services/movies.service';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { DialogboxComponent } from '../dialogbox/dialogbox.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -8,7 +10,7 @@ import { MoviesService } from 'src/app/services/movies.service';
   styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent {
-  constructor(){
+  constructor(private dialog:MatDialog){
 
   }
 @Input() movie!:Movie;
@@ -20,7 +22,13 @@ toggleWatchList(){
 }
 
 deleteMovie(id:number){
-  this.deleteEvent.emit(id);
+  const dialogRef=this.dialog.open(DialogboxComponent,{data:"Are you sure want to delete?"});
+  dialogRef.afterClosed().subscribe((data)=>{
+    if(data=="ok"){
+      this.deleteEvent.emit(id);
+    }
+  })
+
 }
 
 }

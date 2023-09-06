@@ -4,7 +4,7 @@
 
 @layer components {
   .movie-list-container {
-    @apply grid sm:grid-cols-12 md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-5 p-20 ;
+    @apply grid sm:grid-cols-12 md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-5 p-5 sm:p-10 md:p-20 ;
     background-color: #000000;
     min-height: calc(100vh - 114px);
   }
@@ -72,6 +72,7 @@ width: 100%;
 .watchlist-button{
     color: #5799ef !important;
     font-size: 25px;
+    height: 25px;
 }
 .ratings{
     font-size: 25px;

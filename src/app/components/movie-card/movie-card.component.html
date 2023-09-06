@@ -6,8 +6,8 @@
     </mat-card-header>
     <img mat-card-image class="card-image" [src]="movie.posterUrl" alt="Movie Poster">
     <mat-card-content class="mt-1">
-      <p>
-        {{movie.description| title}}
+      <p innerHTML="{{movie.description}}">
+       
       </p>
     </mat-card-content>
     <mat-card-actions>

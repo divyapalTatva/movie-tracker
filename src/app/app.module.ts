@@ -18,6 +18,7 @@ import { AddEditMovieComponent } from './components/add-edit-movie/add-edit-movi
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { DialogboxComponent } from './components/dialogbox/dialogbox.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ToastrModule } from 'ngx-toastr';
     TitlePipe,
     DetailsHeaderComponent,
     AddEditMovieComponent,
+    DialogboxComponent,
 
     
   ],

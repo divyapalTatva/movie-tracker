@@ -21,6 +21,7 @@ export class AddEditMovieComponent {
   imagePath: string = '';
   id:number=0;
   movie!:Movie;
+
   constructor(
     private fb: FormBuilder,
     private movieService: MoviesService,
@@ -30,7 +31,28 @@ export class AddEditMovieComponent {
   ) {}
 
   ngOnInit(): void {
-    this.movieService.getGenre().subscribe((data) => (this.genres = data));
+    // this.movieService.getGenre().subscribe((data) => (this.genres = data));
+    this.genres= [
+      {
+        "id": 1,
+        "name": "Romance"
+      },
+      {
+        "id": 2,
+        "name": "Drama"
+      },
+      {
+        "id": 3,
+        "name": "Action"
+      },
+      {
+        "id": 4,
+        "name": "Thriller"
+      },
+      {
+        "id": 5,
+        "name": "Comedy"
+      }];
     this.id = this.params.snapshot.params['id'];
     this.createMovieForm();
     
@@ -181,11 +203,9 @@ total: this.movie.total
   removeImage() {
     if(this.id !=0){
       this.movieForm.get('posterUrl')?.setValidators([Validators.required]);
-      this.movieForm.get('posterUrl')?.updateValueAndValidity();
-      console.log("updating");
-      console.log(this.movieForm.get('posterUrl')?.valid);
-      
     }
+    this.movieForm.get('posterUrl')?.updateValueAndValidity();
+    this.movieForm.get('posterUrl')?.reset();
     this.imagePath = '';
     this.invalidImg=true;
   }
@@ -213,11 +233,13 @@ total: this.movie.total
         total: this.movieForm.get('total')?.value,
       };
       if(this.id==0){
-        this.movieService.addMovie(movie).subscribe((data) => {});
+        // this.movieService.addMovie(movie).subscribe((data) => {});
+        this.movieService.addMovieLocally(movie);
         this.toastr.success("Success","Movie Added")
       }
       else{
-        this.movieService.updateMovie(this.id,movie).subscribe((data) => {});
+        // this.movieService.updateMovie(this.id,movie).subscribe((data) => {});
+        this.movieService.updateMovieLocally(this.id,movie);
         this.toastr.success("Success","Movie Updated")
       }
       this.movieForm.reset();

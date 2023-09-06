@@ -12,6 +12,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -32,7 +33,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatTableModule,
     MatDividerModule,
     MatListModule,
-    MatSelectModule 
+    MatSelectModule,
+    MatDialogModule 
   ]
 })
 export class MaterialModule { }

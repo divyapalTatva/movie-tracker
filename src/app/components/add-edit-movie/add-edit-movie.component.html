@@ -91,10 +91,10 @@
 
               
   <div class="sm:col-span-1 md:col-span-12 lg:col-span-12  xl:col-span-12">
-    <input  type="file" #filePicker  (input)="onImagePicked($event)" formControlName="posterUrl">
+    <input  type="file" #filePicker  (input)="onImagePicked($event)" formControlName="posterUrl" accept="image/*">
     <mat-error *ngIf="movieForm.get('posterUrl')?.hasError('required') && invalidImg">Please Upload Valid Image</mat-error>
             </div>
-            <div class="sm:col-span-1 md:col-span-12 lg:col-span-12  xl:col-span-12" [ngClass]="{'none':!movieForm.get('posterUrl')?.valid,'block':movieForm.get('posterUrl')?.valid}">
+            <div class="sm:col-span-1 md:col-span-12 lg:col-span-12  xl:col-span-12" [ngClass]="{'none':this.imagePath=='','block':this.imagePath !=''}">
               <mat-icon class="white-font" (click)="removeImage()"> close</mat-icon>
              <img [src]="imagePath" class="previewImg" alt="">
                       </div>
