@@ -1,0 +1,45 @@
+.card-image{
+    height: 400px;
+    width: 100%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+*{
+    color: #ffffff;
+}
+.movie-card{
+    border-radius: 10px;
+    padding-top: 0px;
+    //background-color: #1a1a1a;
+    background-color: #353535;
+}
+.card-title{
+    color: #f5c518;
+    margin-top: 0px;
+}
+
+.watchlist-button{
+    color: #5799ef !important;
+}
+
+.red-text{
+    color: red !important;
+}
+
+.info-button{
+    color: #ffffff !important;
+}
+.card-header{
+    display: flex;
+    align-items: center;
+}
+
+mat-card-content > p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    line-clamp: 8;
+    -webkit-box-orient: vertical;
+  }

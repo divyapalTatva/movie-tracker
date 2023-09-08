@@ -1,0 +1,11 @@
+<mat-toolbar  class="movie-header" >
+    <button (click)="toggleSidebar.emit()" mat-icon-button class="menu-button">
+     <mat-icon >menu</mat-icon>
+   </button>
+   <span class="header-title">Movie Explorer</span>
+   <span class="example-spacer"></span>
+  <mat-form-field class="search-box">
+    <input type="text" matInput appearance="fill" placeholder="search movie" (keyup)="searchMovie($event)">
+    <mat-icon matSuffix class="search-icon">search</mat-icon>
+  </mat-form-field>
+ </mat-toolbar>

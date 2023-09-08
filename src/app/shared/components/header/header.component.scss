@@ -1,0 +1,38 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .movie-header{
+        @apply flex justify-between items-center;
+        background: #353535 ;
+    }
+}
+
+.search-box{
+    margin-bottom: -1.25rem;  
+}
+.menu-button{
+     display: none !important;  
+}
+
+.header-title{
+color: #fff;
+}
+.search-icon{
+    color: #000;
+    cursor: pointer;
+    display: block !important;
+}
+
+  @media screen and (max-width: 640px) {
+    .search-box{
+        display: none !important;  
+    }
+    .movie-header{
+        justify-content: center;
+        
+    }
+   
+  }

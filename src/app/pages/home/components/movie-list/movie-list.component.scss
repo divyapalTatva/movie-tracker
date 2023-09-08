@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .movie-list-container {
+    @apply grid grid-cols-1 p-3 gap-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-5 sm:p-10 ;
+    background-color: #000000;
+    min-height: calc(100vh - 170px);
+    padding-top: 0px !important;
+  }
+
+  .search-header{
+    @apply flex justify-between items-center;
+    display: none;
+    background-color: #353535;
+}
+
+}
+
+.search-icon{
+  color: #000;
+  cursor: pointer;
+  display: block !important;
+}
+
+.search-box{
+  margin-bottom: -1.25rem;  
+}
+
+.no-movie{
+ 
+  display: flex;
+  color: #f5c518;
+  font-weight: 400;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  padding: 12px 12px;
+  text-align: center;
+}
+
+.extra-div{
+  height: 56px;
+  background-color: #000000;
+}
+
+.add-movie{
+  display: flex;
+  justify-content: end;
+  background-color: #000000;
+  padding-right: 40px;
+  padding: 10px 40px;
+}
+
+.add-movie-button{
+  background-color: #f5c518; 
+}
+
+.add-icon{
+  color: #000;
+  font-weight: 500;
+}
+mat-paginator {
+  display: flex ;
+  justify-content: center ;
+  background-color: #000000;
+  color: #fff;
+  ::ng-deep .mat-paginator-page-size { 
+      ::ng-deep .mat-select-value {   // this is to change color of page size text in mat paginator
+        color: #fff !important;
+      }
+    
+      ::ng-deep .mat-select-trigger {   // this is to change color of page size text in mat paginator
+        color: #fff !important;
+      }
+    
+      ::ng-deep .mat-select-arrow {    // this is to change color of arrow beside pagesize in mat paginator
+        color: #fff !important;
+      }   
+    }
+}
+
+@media screen and (max-width: 640px) {
+  .search-header{
+      display: flex !important;  
+      justify-content: center !important;
+      align-items: start !important;
+      height: 65px;
+  }}
+ 
+  @media screen and (max-width: 426px) {
+    .add-movie{
+      width: fit-content;
+      padding: 0px;
+      position: fixed;
+      bottom: 12px;
+      right: 12px;
+      z-index: 10;
+      border-radius:50% ;
+    }
+    
+    .movie-list-container{
+      padding-top: 12px !important;
+    }
+    .add-movie-button{
+      background-color: #f5c518; 
+      height: 40px;
+      width: 40px;
+    }
+
+}

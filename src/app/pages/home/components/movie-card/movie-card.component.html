@@ -1,0 +1,20 @@
+<mat-card class="movie-card ">
+    <mat-card-header class="card-header">
+      
+      <mat-card-title class="card-title">{{movie.title}}</mat-card-title>
+      <mat-card-subtitle class="card-subtitle">{{movie.genre}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image class="card-image" [src]="movie.posterUrl" alt="Movie Poster">
+    <mat-card-content class="mt-1">
+      <p innerHTML="{{movie.description}}">
+       
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button class="watchlist-button" (click)="toggleWatchList()"> <mat-icon class="watchlist-button">{{watchlistIcon}}</mat-icon>Watchlist</button>
+      <button mat-button class="info-button" [routerLink]="'details/'+movie.id">Info</button>
+      <button mat-button class="info-button" [routerLink]="'edit/'+movie.id">Edit</button>
+      <button mat-button class=" red-text" color="primary" (click)="deleteMovie(movie.id)">Delete</button>
+    </mat-card-actions>
+  </mat-card>
+  

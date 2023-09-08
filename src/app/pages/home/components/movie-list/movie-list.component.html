@@ -1,0 +1,34 @@
+
+<mat-toolbar  class="search-header">
+  <mat-form-field class="search-box">
+    <input type="text" matInput appearance="fill" placeholder="search movie" (keyup)="searchMovie($event)">
+    <mat-icon matSuffix class="search-icon">search</mat-icon>
+  </mat-form-field>
+ </mat-toolbar>
+
+<div></div>
+<div class="add-movie">
+    <button mat-fab class="add-movie-button" aria-label="Example icon button with a delete icon"  routerLink="add">
+        <mat-icon class="add-icon">add</mat-icon>
+      </button>
+</div>
+
+    <div class="movie-list-container" >
+        <div *ngIf="dataSource?.filteredData?.length ==0" class="no-movie col-span-12">
+           <span>Sorry !! No such movie found </span> 
+            </div>
+        <app-movie-card *ngFor="let movie of searchedMovies|async;let i=index" [movie]="movie" (deleteEvent)="deleteMovie($event)">
+    
+        </app-movie-card>
+    
+    </div>
+    <div >
+
+    </div >
+    <mat-paginator
+                  [pageSize]="5"
+                  [pageSizeOptions]="[5, 10, 25, 100]"
+    
+                  [pageIndex]="0">
+    </mat-paginator>
+

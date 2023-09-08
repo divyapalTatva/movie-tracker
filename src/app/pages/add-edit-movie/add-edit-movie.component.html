@@ -1,0 +1,111 @@
+<details-header></details-header>
+<div class="form-container" >
+    <form [formGroup]="movieForm" >
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-12  lg:grid-cols-12  xl:grid-cols-12 main-div sm:gap-10">
+            <div class="col-span-1 sm:col-span-1 md:col-span-12 lg:col-span-12  xl:col-span-12">
+                <h4  class="white-font">Title</h4>
+                <mat-form-field class="width-100" color="accent">  
+                    <input matInput formControlName="title">
+                    <mat-error *ngIf="validation.isInvalid(movieForm,'title')">{{validation.getErrorMessage(movieForm,'title')}}</mat-error>
+                  </mat-form-field>
+                  
+            </div>
+            <div class="form-field">
+                <h4  class="white-font">Director</h4>
+            
+                <mat-form-field class="width-100"  color="accent">
+                    
+                    <input matInput formControlName="director">
+                    <mat-error *ngIf="validation.isInvalid(movieForm,'director')">{{validation.getErrorMessage(movieForm,'director')}}</mat-error>
+                  </mat-form-field>
+                  
+            </div>
+            <div class="form-field">
+                <h4  class="white-font">Writer </h4>
+                <mat-form-field class="width-100"  color="accent">
+                  
+                    <input matInput formControlName="writer">
+                    <mat-error *ngIf="validation.isInvalid(movieForm,'writer')">{{validation.getErrorMessage(movieForm,'writer')}}</mat-error>
+                  </mat-form-field>
+                  
+            </div>
+            <div class="form-field">
+                <h4  class="white-font">Lead Actor</h4>
+                <mat-form-field class="width-100">
+                  
+                    <input matInput formControlName="leadActor">
+                    <mat-error *ngIf="validation.isInvalid(movieForm,'leadActor')">{{validation.getErrorMessage(movieForm,'leadActor')}}</mat-error>
+                  </mat-form-field>
+                 
+            </div>
+            <div class="form-field">
+                <h4  class="white-font">Select Genre</h4>
+                <mat-form-field class="width-100 form-input">
+                  <mat-label>Genre</mat-label>
+                  <mat-select formControlName="genre">
+                    <mat-option *ngFor="let genre of genres" [value]="genre.name">
+                      {{genre.name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="validation.isInvalid(movieForm,'genre')">{{validation.getErrorMessage(movieForm,'genre')}}</mat-error>
+                </mat-form-field>
+                
+            </div>
+
+            <div class="col-span-1 sm:col-span-1 md:col-span-12 lg:col-span-12  xl:col-span-12">
+              <h4  class="white-font">Description</h4>
+              <ckeditor class="w-full" [editor]="Editor" data="<p>Hello, world!</p>" (ready)="onReady($event)" formControlName="description"></ckeditor>
+              <mat-error *ngIf="validation.isInvalid(movieForm,'description')">{{validation.getErrorMessage(movieForm,'description')}}</mat-error>
+          </div>    
+          <div class="form-field">
+            <h4  class="white-font">Budget</h4>
+            <mat-form-field class="width-100">
+                <input matInput formControlName="budget">
+                <mat-error *ngIf="validation.isInvalid(movieForm,'budget')">{{validation.getErrorMessage(movieForm,'budget')}}</mat-error>
+              </mat-form-field>
+              
+              
+        </div>
+        <div class="form-field">
+          <h4  class="white-font">Gross India</h4>
+          <mat-form-field class="width-100">
+              <input matInput formControlName="grossIndia">
+              <mat-error *ngIf="validation.isInvalid(movieForm,'grossIndia')">{{validation.getErrorMessage(movieForm,'grossIndia')}}</mat-error>
+            </mat-form-field>
+      </div>
+      <div class="form-field">
+        <h4  class="white-font">Gross World</h4>
+        <mat-form-field class="width-100">
+            <input matInput formControlName="grossWorld">
+            <mat-error *ngIf="validation.isInvalid(movieForm,'grossWorld')">{{validation.getErrorMessage(movieForm,'grossWorld')}}</mat-error>
+          </mat-form-field>
+    </div>
+    <div class="form-field">
+      <h4  class="white-font">Total Collection</h4>
+      <mat-form-field class="width-100">
+          <input matInput formControlName="total">
+          <mat-error *ngIf="validation.isInvalid(movieForm,'total')">{{validation.getErrorMessage(movieForm,'total')}}</mat-error>
+        </mat-form-field>
+        
+  </div> 
+
+              
+  <div class="col-span-1 sm:col-span-1 md:col-span-12 lg:col-span-12  xl:col-span-12">
+    <input  type="file" #filePicker  (input)="onImagePicked($event)" formControlName="posterUrl" accept="image/*">
+    <mat-error *ngIf="validation.hasError(movieForm,'posterUrl','required') && invalidImg">Please Upload Valid Image</mat-error>
+            </div>
+            <div class="sm:col-span-1 md:col-span-12 lg:col-span-12  xl:col-span-12" [ngClass]="{'none':this.imagePath=='','block':this.imagePath !=''}">
+              <mat-icon class="white-font" (click)="removeImage()"> close</mat-icon>
+             <img [src]="imagePath" class="previewImg" alt="">
+                      </div>
+  <div class="col-span-1 sm:col-span-1 md:col-span-12 lg:col-span-12  xl:col-span-12 submit-div">
+    <button mat-button (click)="cancel()" class="white-font white-border">Cancel</button>
+    <button mat-button  class="white-font" (click)="submit()"> Submit</button>
+            </div>
+
+        </div>
+
+        
+    </form>
+
+</div>
