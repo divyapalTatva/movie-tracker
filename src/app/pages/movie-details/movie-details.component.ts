@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Movie } from 'src/app/models';
 import { MovieDataService } from 'src/app/services/movie-data/movie-data.service';
+import { MovieRxjsService } from 'src/app/services/movie-rxjs/movie-rxjs.service';
 import { MoviesService } from 'src/app/services/movie/movies.service';
 
 @Component({
@@ -14,15 +15,16 @@ export class MovieDetailsComponent implements OnInit{
   id:number=0;
   watchlistIcon:string='add';
   
-constructor(private route:ActivatedRoute,private movieService:MoviesService,private dataService:MovieDataService){
+constructor(private route:ActivatedRoute,private movieService:MoviesService,private dataService:MovieDataService,private movieRxjs:MovieRxjsService){
 }
 
 
   ngOnInit(): void {
     this.route.params.subscribe((params)=>{
       this.id=params['id'];
-      this.movie=this.dataService.getMovieDetails(this.id);
+      // this.movie=this.dataService.getMovieDetails(this.id);
       
+      this.movie=this.movieRxjs.getMovieDetails(this.id)!;
     })
     window.scrollTo(0, 0)
   }

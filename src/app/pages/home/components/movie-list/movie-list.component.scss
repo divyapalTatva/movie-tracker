@@ -26,6 +26,7 @@
 
 .search-box{
   margin-bottom: -1.25rem;  
+  width: 100%;
 }
 
 .no-movie{
@@ -89,7 +90,7 @@ mat-paginator {
       height: 65px;
   }}
  
-  @media screen and (max-width: 426px) {
+  @media screen and (max-width: 640px) {
     .add-movie{
       width: fit-content;
       padding: 0px;
@@ -108,5 +109,26 @@ mat-paginator {
       height: 40px;
       width: 40px;
     }
+
+}
+
+@media screen and (min-width:641px) and (max-width:767px) {
+  .add-movie{
+    width: fit-content;
+    padding: 0px;
+    position: fixed;
+    bottom: 20px;
+    right: 40px;
+    z-index: 10;
+    border-radius:50% ;
+  }
+  .movie-list-container{
+    padding-top: 20px !important;
+  }
+  .add-movie-button{
+    background-color: #f5c518; 
+    height: 50px;
+    width: 50px;
+  }
 
 }

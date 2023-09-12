@@ -6,6 +6,7 @@ import { Editor } from '@ckeditor/ckeditor5-core';
 import { ToastrService } from 'ngx-toastr';
 import { Genre, Movie } from 'src/app/models';
 import { MovieDataService } from 'src/app/services/movie-data/movie-data.service';
+import { MovieRxjsService } from 'src/app/services/movie-rxjs/movie-rxjs.service';
 import { MoviesService } from 'src/app/services/movie/movies.service';
 import { ValidationService } from 'src/app/services/validation/validation.service';
 
@@ -32,7 +33,7 @@ export class AddEditMovieComponent {
     private router: Router,
     private toastr: ToastrService,
     public validation:ValidationService,
-    
+    private movieRxjs:MovieRxjsService
   ) {}
 
   ngOnInit(): void {
@@ -85,7 +86,7 @@ export class AddEditMovieComponent {
 
   createMovieForm() {
     this.movieForm = this.fb.group({
-      title: ['', [Validators.required]],
+      title: ['', [Validators.required,Validators.maxLength(20)]],
       genre: ['', [Validators.required]],
       description: ['', [Validators.required, Validators.minLength(200)]],
       director: ['', [Validators.required]],
@@ -125,7 +126,8 @@ total: this.movie.total
   }
 
   LoadPreviousData(){
-    this.movie=this.dataService.getMovieDetails(this.id);
+    // this.movie=this.dataService.getMovieDetails(this.id);
+    this.movie=this.movieRxjs.getMovieDetails(this.id)!;
     this.imagePath=this.movie.posterUrl;
     this.setMovieForm();
   }
@@ -164,12 +166,14 @@ total: this.movie.total
       };
       if(typeof this.id=='undefined'){
         // this.movieService.addMovie(movie).subscribe((data) => {});
-        this.dataService.addMovieLocally(movie);
+        // this.dataService.addMovieLocally(movie);
+               this.movieRxjs.addMovie(movie);
         this.toastr.success("Success","Movie Added")
       }
       else{
         // this.movieService.updateMovie(this.id,movie).subscribe((data) => {});
-        this.dataService.updateMovieLocally(this.id,movie);
+        // this.dataService.updateMovieLocally(this.id,movie);
+          this.movieRxjs.updateMovie(movie);
         this.toastr.success("Success","Movie Updated")
       }
       this.movieForm.reset();

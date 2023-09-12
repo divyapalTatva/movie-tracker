@@ -2,10 +2,11 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, ViewChild }
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Observable, catchError } from 'rxjs';
+import { Observable, catchError, debounce, debounceTime } from 'rxjs';
 import { MOVIES } from 'src/app/data/data';
 import { Movie } from 'src/app/models';
 import { MovieDataService } from 'src/app/services/movie-data/movie-data.service';
+import { MovieRxjsService } from 'src/app/services/movie-rxjs/movie-rxjs.service';
 import { MoviesService } from 'src/app/services/movie/movies.service';
 
 @Component({
@@ -19,27 +20,33 @@ export class MovieListComponent implements OnInit,AfterViewInit{
 searchedMovies!:Observable<Movie[]>;
 @ViewChild(MatPaginator) paginator!: MatPaginator;
 dataSource!: MatTableDataSource<any>;
-
-  constructor(private moviesService: MoviesService,private dataService:MovieDataService,private changeDetector:ChangeDetectorRef ,private router:Router) {
+movies:Movie[]=[];
+  constructor(private moviesService: MoviesService,private dataService:MovieDataService,private changeDetector:ChangeDetectorRef ,private router:Router,private movieRxjs:MovieRxjsService) {
   }
 
   ngOnInit(): void {    
-    let movies=this.dataService.getMoviesFromLocal();
-    if(movies==null){
-      // this.moviesService.getMovies().subscribe((data)=>{  
-      //   this.moviesService.setMoviesToLocal(data);
-      //   this.moviesService.movies=data;
-      //   this.setDataSource();
-      // });
+
+    // let movies=this.dataService.getMoviesFromLocal();
+      // let movies;
+      this.movieRxjs.movieSubject.subscribe((data)=>{
+       console.log("observer movie-list");
+          this.movies=data;
+      })
+    // if(movies==null){
+    //   this.moviesService.getMovies().subscribe((data)=>{  
+    //     this.moviesService.setMoviesToLocal(data);
+    //     this.moviesService.movies=data;
+    //     this.setDataSource();
+    //   });
        
-        this.dataService.setMoviesToLocal(MOVIES);
-        this.dataService.movies=MOVIES;
-        this.setDataSource();
+    //     this.dataService.setMoviesToLocal(MOVIES);
+    //     this.dataService.movies=MOVIES;
+    //     this.setDataSource();
      
-    }
-    else{
-      this.dataService.movies=movies;
-    }    
+    // }
+    // else{
+    //    this.dataService.movies=movies;
+    // }    
   }
 
   ngAfterViewInit(): void {
@@ -49,11 +56,11 @@ dataSource!: MatTableDataSource<any>;
 
   setDataSource(){
     this.dataSource=new MatTableDataSource<any>(
-      this.dataService.movies
+      this.movies
       );
       this.searchedMovies = this.dataSource.connect();
       this.dataSource.paginator = this.paginator;
-      this.dataService.search.subscribe({next:(data)=>{    
+      this.dataService.search.pipe(debounceTime(300)).subscribe({next:(data)=>{    
         this.dataSource.filter=data;
       }})
   }
@@ -66,6 +73,7 @@ dataSource!: MatTableDataSource<any>;
     });
     this.dataSource._updateChangeSubscription();
     // this.moviesService.deleteMovie(id).subscribe((data)=>{});
-    this.dataService.deleteMovieLocally(id);
+    // this.dataService.deleteMovieLocally(id);
+    this.movieRxjs.deleteMovie(id);
   }
 }
