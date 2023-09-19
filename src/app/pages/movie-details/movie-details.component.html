@@ -1,9 +1,9 @@
 <details-header></details-header>
-<div class="movie-list-container">
+<div class="movie-list-container" *ngIf="movie">
   <div class="left-div">
     <img
       mat-card-image
-      [src]="movie.posterUrl"
+      src="{{ movie.posterUrl }}"
       alt="Movie Poster"
       class="movie-image"
     />
@@ -42,7 +42,9 @@
           <mat-divider> </mat-divider>
         </div>
 
-        <div class="col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3 flex flex-col justify-evenly">
+        <div
+          class="col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3 flex flex-col justify-evenly"
+        >
           <div>
             <span class="ratings">Ratings</span>
             <div class="rate-content">
@@ -70,17 +72,34 @@
 
       <div class="storyline-div col-span-6">
         <span class="storyline">Storyline</span>
-        <div class="movie-description" innerHTML="{{movie.description}}">
-          
-        </div>
+        <div
+          class="movie-description"
+          innerHTML="{{ movie.description }}"
+        ></div>
       </div>
 
       <span class="storyline col-span-6 mt-7">Box Office</span>
       <div class="storyline-div col-span-6 grid grid-cols-6 gap-5">
-        <div class="col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3 color-white">Budget : {{movie.budget}}$</div>
-        <div class="col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3 color-white">Gross Worldwide : {{movie.grossWorld}}$</div>
-        <div class="col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3 color-white">Gross India : {{movie.grossIndia}}$</div>
-        <div class="col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3 color-white">Total Collection: {{movie.total}}$</div>
+        <div
+          class="col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3 color-white"
+        >
+          Budget : {{ movie.budget }}$
+        </div>
+        <div
+          class="col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3 color-white"
+        >
+          Gross Worldwide : {{ movie.grossWorld }}$
+        </div>
+        <div
+          class="col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3 color-white"
+        >
+          Gross India : {{ movie.grossIndia }}$
+        </div>
+        <div
+          class="col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3 color-white"
+        >
+          Total Collection: {{ movie.total }}$
+        </div>
       </div>
     </div>
   </div>

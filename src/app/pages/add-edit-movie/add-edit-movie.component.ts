@@ -5,6 +5,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Editor } from '@ckeditor/ckeditor5-core';
 import { ToastrService } from 'ngx-toastr';
 import { Genre, Movie } from 'src/app/models';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { MovieDataService } from 'src/app/services/movie-data/movie-data.service';
 import { MovieRxjsService } from 'src/app/services/movie-rxjs/movie-rxjs.service';
 import { MoviesService } from 'src/app/services/movie/movies.service';
@@ -15,50 +16,51 @@ import { ValidationService } from 'src/app/services/validation/validation.servic
   templateUrl: './add-edit-movie.component.html',
   styleUrls: ['./add-edit-movie.component.scss'],
 })
-
 export class AddEditMovieComponent {
   public Editor = ClassicEditor;
   movieForm!: FormGroup;
   genres: Genre[] = [];
   invalidImg: boolean = false;
   imagePath: string = '';
-  id:number=0;
-  movie!:Movie;
+  id: number = 0;
+  movie!: Movie;
 
   constructor(
     private fb: FormBuilder,
     private movieService: MoviesService,
-    private dataService:MovieDataService,
+    private dataService: MovieDataService,
     private params: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService,
-    public validation:ValidationService,
-    private movieRxjs:MovieRxjsService
+    public validation: ValidationService,
+    private movieRxjs: MovieRxjsService,
+    private authService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
     // this.movieService.getGenre().subscribe((data) => (this.genres = data));
-    this.genres= [
+    this.genres = [
       {
-        "id": 1,
-        "name": "Romance"
+        id: 1,
+        name: 'Romance',
       },
       {
-        "id": 2,
-        "name": "Drama"
+        id: 2,
+        name: 'Drama',
       },
       {
-        "id": 3,
-        "name": "Action"
+        id: 3,
+        name: 'Action',
       },
       {
-        "id": 4,
-        "name": "Thriller"
+        id: 4,
+        name: 'Thriller',
       },
       {
-        "id": 5,
-        "name": "Comedy"
-      }];
+        id: 5,
+        name: 'Comedy',
+      },
+    ];
     this.id = this.params.snapshot.params['id'];
     this.createMovieForm();
   }
@@ -68,15 +70,15 @@ export class AddEditMovieComponent {
     const parent = element.parentElement!;
     parent.insertBefore(editor.ui.view.toolbar.element!, element);
   }
-  
+
   onImagePicked(event: any) {
     this.invalidImg = true;
     const file = (event.target as HTMLInputElement)?.files![0];
-  if(file.size>2*1024*1024){
-    this.toastr.error("Error","max image size can be 2mb")
-    return;
-  }
-  
+    if (file.size > 2 * 1024 * 1024) {
+      this.toastr.error('Error', 'max image size can be 2mb');
+      return;
+    }
+
     const fileReader = new FileReader();
     fileReader.addEventListener('load', (event) => {
       this.imagePath = event.target?.result as string;
@@ -86,7 +88,7 @@ export class AddEditMovieComponent {
 
   createMovieForm() {
     this.movieForm = this.fb.group({
-      title: ['', [Validators.required,Validators.maxLength(20)]],
+      title: ['', [Validators.required, Validators.maxLength(20)]],
       genre: ['', [Validators.required]],
       description: ['', [Validators.required, Validators.minLength(200)]],
       director: ['', [Validators.required]],
@@ -96,50 +98,52 @@ export class AddEditMovieComponent {
       budget: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       grossIndia: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       grossWorld: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-      total: [
-        '',
-        [Validators.required, Validators.pattern('[0-9]+')],
-      ],
+      total: ['', [Validators.required, Validators.pattern('[0-9]+')]],
     });
 
-    if(typeof this.id !='undefined'){
+    if (typeof this.id != 'undefined') {
       this.movieForm.get('posterUrl')?.setValidators([]);
       this.movieForm.get('posterUrl')?.updateValueAndValidity();
-      this.LoadPreviousData()
+      this.LoadPreviousData();
     }
-
   }
 
   setMovieForm() {
-this.movieForm.setValue({ title: this.movie.title,
-genre:this.movie.genre,
-description: this.movie.description,
-director: this.movie.director,
-writer: this.movie.writer,
-posterUrl: "",
-leadActor: this.movie.leadActor,
-budget: this.movie.budget,
-grossIndia:this.movie.grossIndia,
-grossWorld: this.movie.grossWorld,
-total: this.movie.total
-  })
+    this.movieForm.setValue({
+      title: this.movie.title,
+      genre: this.movie.genre,
+      description: this.movie.description,
+      director: this.movie.director,
+      writer: this.movie.writer,
+      posterUrl: '',
+      leadActor: this.movie.leadActor,
+      budget: this.movie.budget,
+      grossIndia: this.movie.grossIndia,
+      grossWorld: this.movie.grossWorld,
+      total: this.movie.total,
+    });
   }
 
-  LoadPreviousData(){
+  LoadPreviousData() {
+    this.movieService.getMovieDetails(this.id).subscribe((data: any) => {
+      this.movie = data.data;
+      this.imagePath = this.movie.posterUrl;
+      this.setMovieForm();
+    });
     // this.movie=this.dataService.getMovieDetails(this.id);
-    this.movie=this.movieRxjs.getMovieDetails(this.id)!;
-    this.imagePath=this.movie.posterUrl;
-    this.setMovieForm();
+    // this.movie=this.movieRxjs.getMovieDetails(this.id)!;
+    // this.imagePath=this.movie.posterUrl;
+    // this.setMovieForm();
   }
 
   removeImage() {
-    if(typeof this.id !='undefined'){
+    if (typeof this.id != 'undefined') {
       this.movieForm.get('posterUrl')?.setValidators([Validators.required]);
     }
     this.movieForm.get('posterUrl')?.updateValueAndValidity();
     this.movieForm.get('posterUrl')?.reset();
     this.imagePath = '';
-    this.invalidImg=true;
+    this.invalidImg = true;
   }
 
   cancel() {
@@ -149,7 +153,7 @@ total: this.movie.total
 
   submit() {
     this.invalidImg = true;
-    if (this.movieForm.valid) {
+    if (this.movieForm.valid && this.authService.validateUser()) {
       let movie: Movie = {
         id: this.id,
         title: this.movieForm.get('title')?.value,
@@ -164,22 +168,19 @@ total: this.movie.total
         grossWorld: this.movieForm.get('grossWorld')?.value,
         total: this.movieForm.get('total')?.value,
       };
-      if(typeof this.id=='undefined'){
-        // this.movieService.addMovie(movie).subscribe((data) => {});
+      if (typeof this.id == 'undefined') {
+        this.movieService.addMovie(movie).subscribe((data) => {});
         // this.dataService.addMovieLocally(movie);
-               this.movieRxjs.addMovie(movie);
-        this.toastr.success("Success","Movie Added")
-      }
-      else{
-        // this.movieService.updateMovie(this.id,movie).subscribe((data) => {});
+        //  this.movieRxjs.addMovie(movie);
+        this.toastr.success('Success', 'Movie Added');
+      } else {
+        this.movieService.updateMovie(movie).subscribe((data) => {});
         // this.dataService.updateMovieLocally(this.id,movie);
-          this.movieRxjs.updateMovie(movie);
-        this.toastr.success("Success","Movie Updated")
+        // this.movieRxjs.updateMovie(movie);
+        this.toastr.success('Success', 'Movie Updated');
       }
       this.movieForm.reset();
       this.router.navigate(['']);
-      
     }
   }
-  
 }
