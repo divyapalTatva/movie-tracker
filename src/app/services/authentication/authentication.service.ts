@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment.development';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { Observable, subscribeOn } from 'rxjs';
+import { Login } from 'src/app/models';
 @Injectable({
   providedIn: 'root',
 })
@@ -19,9 +20,10 @@ export class AuthenticationService {
     this.jwtHelper = new JwtHelperService();
   }
 
-  login(password: string) {
+  login(login: Login) {
     return this.http.post(`${environment.baseUrl}Authentication/Login`, {
-      password: password,
+      userName: login.userName,
+      password: login.password,
     });
   }
 
@@ -52,19 +54,19 @@ export class AuthenticationService {
       } else {
         const dialogRef = this.dialog.open(PasswordDialogComponent, {});
         dialogRef.afterClosed().subscribe((data) => {
-          if (data == '') {
-            subscriber.next(false);
-          } else {
-            this.login(data).subscribe((res: any) => {
-              if (res.result) {
-                this.setToken(res.data);
-                this.toastr.success(res.message);
-              } else {
-                this.toastr.error(res.message);
-              }
-              subscriber.next(res.result);
-            });
-          }
+          this.login(data).subscribe((res: any) => {
+            console.log(res);
+
+            if (res.result) {
+              this.setToken(res.data);
+              this.toastr.success(res.message);
+            } else {
+              console.log('ELSE');
+
+              this.toastr.error(res.message);
+            }
+            subscriber.next(res.result);
+          });
         });
       }
     });

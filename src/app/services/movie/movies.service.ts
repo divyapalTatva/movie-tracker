@@ -15,12 +15,11 @@ export class MoviesService {
   }
 
   getMovieDetails(id: number) {
-    console.log('DEtails', id);
-
     return this.http.get(
       `${environment.baseUrl}Movie/GetMovieDetails?id=${id}`
     );
   }
+
   searchMovies(searchTerm?: string) {
     return this.http.get(
       `${environment.baseUrl}Movie/GetMovies?searchTerm=${searchTerm}`
@@ -40,6 +39,6 @@ export class MoviesService {
   }
 
   getGenre() {
-    return this.http.get<Genre[]>('http://localhost:3000/genre');
+    return this.http.get<Genre[]>(`${environment.baseUrl}Movie/GetGenres`);
   }
 }

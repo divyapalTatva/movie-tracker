@@ -2,7 +2,8 @@ export interface Movie {
   id: number;
   title: string;
   posterUrl: string;
-  genre: string;
+  genre?: string;
+  genreId?: number;
   description: string;
   director: string;
   writer: string;
@@ -14,6 +15,6 @@ export interface Movie {
 }
 
 export interface Genre {
-  id: number;
-  name: string;
+  genreId: number;
+  genreName: string;
 }

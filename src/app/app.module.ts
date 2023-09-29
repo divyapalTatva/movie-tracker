@@ -48,7 +48,7 @@ import { LoaderInterceptor } from './interceptors/loader/loader.interceptor';
     CKEditorModule,
     ReactiveFormsModule,
     FormsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot(), //{ timeOut: 2000, preventDuplicates: true }
   ],
   providers: [
     {

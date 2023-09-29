@@ -10,6 +10,7 @@
     class="card-image"
     src="{{ movie.posterUrl }}"
     alt="Movie Poster"
+    onerror="if(this.src !='/assets/images/error-image.png') this.src='/assets/images/error-image.png'"
   />
   <mat-card-content class="mt-1">
     <p innerHTML="{{ movie.description }}"></p>

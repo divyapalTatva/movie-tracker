@@ -39,28 +39,9 @@ export class AddEditMovieComponent {
 
   ngOnInit(): void {
     // this.movieService.getGenre().subscribe((data) => (this.genres = data));
-    this.genres = [
-      {
-        id: 1,
-        name: 'Romance',
-      },
-      {
-        id: 2,
-        name: 'Drama',
-      },
-      {
-        id: 3,
-        name: 'Action',
-      },
-      {
-        id: 4,
-        name: 'Thriller',
-      },
-      {
-        id: 5,
-        name: 'Comedy',
-      },
-    ];
+    this.movieService.getGenre().subscribe((data: any) => {
+      this.genres = data.data;
+    });
     this.id = this.params.snapshot.params['id'];
     this.createMovieForm();
   }
@@ -111,7 +92,7 @@ export class AddEditMovieComponent {
   setMovieForm() {
     this.movieForm.setValue({
       title: this.movie.title,
-      genre: this.movie.genre,
+      genre: this.movie.genreId,
       description: this.movie.description,
       director: this.movie.director,
       writer: this.movie.writer,
@@ -153,34 +134,44 @@ export class AddEditMovieComponent {
 
   submit() {
     this.invalidImg = true;
-    if (this.movieForm.valid && this.authService.validateUser()) {
-      let movie: Movie = {
-        id: this.id,
-        title: this.movieForm.get('title')?.value,
-        posterUrl: this.imagePath,
-        genre: this.movieForm.get('genre')?.value,
-        description: this.movieForm.get('description')?.value,
-        director: this.movieForm.get('director')?.value,
-        writer: this.movieForm.get('writer')?.value,
-        leadActor: this.movieForm.get('leadActor')?.value,
-        budget: this.movieForm.get('budget')?.value,
-        grossIndia: this.movieForm.get('grossIndia')?.value,
-        grossWorld: this.movieForm.get('grossWorld')?.value,
-        total: this.movieForm.get('total')?.value,
-      };
-      if (typeof this.id == 'undefined') {
-        this.movieService.addMovie(movie).subscribe((data) => {});
-        // this.dataService.addMovieLocally(movie);
-        //  this.movieRxjs.addMovie(movie);
-        this.toastr.success('Success', 'Movie Added');
-      } else {
-        this.movieService.updateMovie(movie).subscribe((data) => {});
-        // this.dataService.updateMovieLocally(this.id,movie);
-        // this.movieRxjs.updateMovie(movie);
-        this.toastr.success('Success', 'Movie Updated');
+    this.authService.validateUser().subscribe((res) => {
+      if (this.movieForm.valid && res) {
+        let movie: Movie = {
+          id: this.id,
+          title: this.movieForm.get('title')?.value,
+          posterUrl: this.imagePath,
+          genreId: this.movieForm.get('genre')?.value,
+          description: this.movieForm.get('description')?.value,
+          director: this.movieForm.get('director')?.value,
+          writer: this.movieForm.get('writer')?.value,
+          leadActor: this.movieForm.get('leadActor')?.value,
+          budget: this.movieForm.get('budget')?.value,
+          grossIndia: this.movieForm.get('grossIndia')?.value,
+          grossWorld: this.movieForm.get('grossWorld')?.value,
+          total: this.movieForm.get('total')?.value,
+        };
+        if (typeof this.id == 'undefined') {
+          this.movieService.addMovie(movie).subscribe((data: any) => {
+            if (data.result) {
+              this.toastr.success('Success', 'Movie Added');
+              this.movieForm.reset();
+              this.router.navigate(['']);
+            }
+          });
+          // this.dataService.addMovieLocally(movie);
+          //  this.movieRxjs.addMovie(movie);
+        } else {
+          this.movieService.updateMovie(movie).subscribe((data: any) => {
+            if (data.result) {
+              this.toastr.success('Success', 'Movie Updated');
+              this.movieForm.reset();
+              this.router.navigate(['']);
+            }
+          });
+          // this.dataService.updateMovieLocally(this.id,movie);
+          // this.movieRxjs.updateMovie(movie);
+        }
       }
-      this.movieForm.reset();
-      this.router.navigate(['']);
-    }
+    });
   }
 }
